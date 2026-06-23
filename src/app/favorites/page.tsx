@@ -7,7 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default async function FavoritesPage() {
-  // 1. Verificar que el usuario esté logueado
+  // revisamos si el usuario ya inició sesión leyendo las cookies
   const cookieStore = await cookies();
   const token = cookieStore.get("recetas_token")?.value;
 
@@ -15,7 +15,7 @@ export default async function FavoritesPage() {
     redirect("/login");
   }
 
-  // 2. Extraer userId del token
+  // sacamos el id del usuario desde su token para saber a quién buscarle los favoritos
   let userId: string;
   try {
     const secret = process.env.JWT_SECRET || "secreto_super_seguro_recetas";
@@ -25,7 +25,7 @@ export default async function FavoritesPage() {
     redirect("/login");
   }
 
-  // 3. Obtener las recetas favoritas
+  // pedimos a la base de datos las recetas que este usuario ha guardado
   const favorites = await getUserFavorites(userId);
 
   return (
