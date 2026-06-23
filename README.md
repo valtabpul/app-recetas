@@ -1,69 +1,69 @@
-# 🍰 Recetario Maestro
+# 🍰 Recipe Master
 
-¡Bienvenido a Recetario Maestro! Una aplicación web diseñada para que los amantes de la cocina puedan descubrir, explorar y guardar sus recetas favoritas. Todo esto envuelto en una interfaz moderna, limpia y con un estilo rosa pastel muy cuidado.
+Welcome to Recipe Master! A web application designed for cooking lovers to discover, explore, and save their favorite recipes. All of this wrapped in a modern, clean interface with a carefully designed pastel pink style.
 
-## ✨ ¿Qué contiene este proyecto?
+## ✨ What does this project contain?
 
-Esta aplicación cuenta con varias funcionalidades clave:
+This application has several key features:
 
-- **Catálogo de Recetas:** Una página principal donde puedes explorar diferentes platos, ver su tiempo de preparación, dificultad y más detalles.
-- **Autenticación Segura:** Sistema de registro e inicio de sesión. Utilizamos JWT (JSON Web Tokens) guardados en cookies para mantener tu sesión activa de forma segura.
-- **Sistema de Favoritos:** ¿Te gustó una receta? Puedes marcarla como favorita. Estas se guardan en tu cuenta y puedes acceder a ellas fácilmente desde la sección "Mis Favoritos".
-- **Correos de Bienvenida:** Al registrarte, recibirás un correo electrónico de bienvenida automático con un diseño bonito (configurado mediante Nodemailer).
-- **Diseño Responsivo:** Se adapta perfectamente tanto a computadoras de escritorio como a dispositivos móviles.
+- **Recipe Catalog:** A main page where you can explore different dishes, see their preparation time, difficulty, and more details.
+- **Secure Authentication:** Registration and login system. We use JWT (JSON Web Tokens) saved in cookies to keep your session active securely.
+- **Favorites System:** Did you like a recipe? You can mark it as a favorite. These are saved in your account and you can easily access them from the "My Favorites" section.
+- **Welcome Emails:** Upon registering, you will receive an automatic welcome email with a beautiful design (configured using Nodemailer).
+- **Responsive Design:** Adapts perfectly to both desktop computers and mobile devices.
 
-## 🛠️ Tecnologías que utilizamos
+## 🛠️ Technologies we use
 
-- **Frontend:** Next.js (App Router), React, Tailwind CSS (para darle ese toque rosa pastel) y componentes de HeroUI.
-- **Backend:** Next.js Server Actions y API Routes.
-- **Base de Datos:** MongoDB con Mongoose para gestionar usuarios, recetas y favoritos.
-- **Seguridad y Utilidades:** `bcryptjs` para encriptar contraseñas, `jsonwebtoken` para manejar las sesiones y `nodemailer` para el envío de correos.
+- **Frontend:** Next.js (App Router), React, Tailwind CSS (to give it that pastel pink touch), and HeroUI components.
+- **Backend:** Next.js Server Actions and API Routes.
+- **Database:** MongoDB with Mongoose to manage users, recipes, and favorites.
+- **Security and Utilities:** `bcryptjs` for encrypting passwords, `jsonwebtoken` for handling sessions, and `nodemailer` for sending emails.
 
-## 🚀 Cómo correr el proyecto en tu computadora
+## 🚀 How to run the project on your computer
 
-Sigue estos pasos para tener la aplicación funcionando de forma local:
+Follow these steps to have the application running locally:
 
-### Requisitos previos
+### Prerequisites
 
-Asegúrate de tener instalado:
-- **Node.js** (versión 18 o superior recomendada).
-- Una cuenta en **MongoDB Atlas** (o MongoDB corriendo localmente) para la base de datos.
-- Una cuenta de correo (ej. Gmail) para configurar el envío de emails.
+Make sure you have installed:
+- **Node.js** (version 18 or higher recommended).
+- A **MongoDB Atlas** account (or MongoDB running locally) for the database.
+- An email account (e.g., Gmail) to configure sending emails.
 
-### Pasos de instalación
+### Installation steps
 
-1. **Clona el repositorio** o descarga los archivos en tu computadora.
-2. Abre una terminal en la carpeta del proyecto y **descarga las dependencias** corriendo el siguiente comando:
+1. **Clone the repository** or download the files to your computer.
+2. Open a terminal in the project folder and **download the dependencies** by running the following command:
    ```bash
    npm install
    ```
 
-3. **Configura las variables de entorno:**
-   Crea un archivo llamado `.env` en la raíz del proyecto basándote en el `.env.local` si existe. Deberá contener lo siguiente:
+3. **Configure the environment variables:**
+   Create a file named `.env` in the root of the project based on `.env.local` if it exists. It should contain the following:
 
    ```env
-   # Conexión a la base de datos
-   MONGODB_URI=tu_url_de_conexion_a_mongodb
+   # Database connection
+   MONGODB_URI=your_mongodb_connection_url
 
-   # Secreto para firmar los tokens (puedes poner cualquier cadena de texto segura)
-   JWT_SECRET=tu_secreto_super_seguro
+   # Secret to sign tokens (you can put any secure text string)
+   JWT_SECRET=your_super_secure_secret
 
-   # Configuración de correo (para los mensajes de bienvenida)
-   EMAIL_USER=tu_correo@gmail.com
-   EMAIL_PASS=tu_contraseña_de_aplicacion_gmail
+   # Email configuration (for welcome messages)
+   EMAIL_USER=your_email@gmail.com
+   EMAIL_PASS=your_gmail_app_password
 
-   # URL de tu app (útil para links en correos)
+   # URL of your app (useful for links in emails)
    NEXT_PUBLIC_APP_URL=http://localhost:3000
    ```
-   *Nota: Si usas Gmail, recuerda generar una "Contraseña de aplicación" en los ajustes de seguridad de Google.*
+   *Note: If you use Gmail, remember to generate an "App Password" in Google's security settings.*
 
-4. **¡Enciende el servidor local!**
-   Una vez configurado todo, arranca el entorno de desarrollo con:
+4. **Start the local server!**
+   Once everything is configured, start the development environment with:
    ```bash
    npm run dev
    ```
 
-5. **Abre tu navegador** y ve a `http://localhost:3000`. ¡Listo! Ya puedes empezar a explorar recetas.
+5. **Open your browser** and go to `http://localhost:3000`. Done! You can now start exploring recipes.
 
-## 💡 Notas adicionales
-- **Recetas de prueba:** Si tu base de datos está vacía, asegúrate de tener alguna forma de insertar recetas de prueba en la colección `recipes` de MongoDB para que el catálogo no aparezca vacío, o créalas directamente desde la base de datos.
+## 💡 Additional notes
+- **Test recipes:** If your database is empty, make sure you have some way to insert test recipes into the `recipes` collection in MongoDB so the catalog doesn't appear empty, or create them directly from the database.
