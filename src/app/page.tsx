@@ -1,8 +1,8 @@
 import { getRecipes } from "@/src/services/recipe";
-import { Card, CardContent } from "@heroui/react";
-import Image from "next/image";
 import Link from "next/link";
 import { cookies } from "next/headers";
+import { checkIsFavorite } from "@/src/app/actions";
+import RecipeCard from "./components/RecipeCard";
 
 export default async function Home() {
   const recipes = await getRecipes();
@@ -27,6 +27,14 @@ export default async function Home() {
       description: "Creaciones exclusivas que cambian con cada estación del año.",
     },
   ];
+
+  // Pre-calculate favorites for the top 6 recipes
+  const topRecipes = recipes.slice(0, 6);
+  const favoriteStatuses = await Promise.all(
+    topRecipes.map(async (recipe) => {
+      return token ? await checkIsFavorite(recipe._id) : false;
+    })
+  );
 
   return (
     <div className="bg-[#FAF6F6] min-h-screen">
@@ -96,42 +104,8 @@ export default async function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {recipes.slice(0, 6).map((recipe) => (
-              <Card
-                key={recipe._id}
-                className="border border-pink-100/50 bg-white hover:shadow-lg transition-all duration-300 rounded-3xl overflow-hidden flex flex-col hover:scale-[1.02]"
-              >
-                {/* Recipe Image */}
-                <div className="relative h-[220px] w-full">
-                  <Image
-                    src={recipe.imageUrl || "/placeholder-recipe.jpg"}
-                    alt={recipe.name}
-                    fill
-                    className="object-cover"
-                  />
-                  {/* Badge overlay */}
-                  <span className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm text-pink-600 text-xs font-semibold px-3 py-1 rounded-full border border-pink-100">
-                    🍰 Receta
-                  </span>
-                </div>
-
-                <CardContent className="p-6 flex flex-col flex-1">
-                  <h3 className="font-serif text-lg font-bold text-zinc-800 mb-2">
-                    {recipe.name}
-                  </h3>
-                  <p className="text-zinc-500 text-xs mb-5">
-                    ⏱️ {recipe.prepTime} · 🧑‍🍳 {recipe.difficulty} · 🍽️ {recipe.servings} porciones
-                  </p>
-
-                  {/* Si está logueado → detalle de receta, si no → login */}
-                  <Link
-                    href={token ? `/recipes/${recipe._id}` : "/login"}
-                    className="mt-auto w-full inline-flex items-center justify-center bg-[#FFE3E3] hover:bg-pink-500 text-pink-700 hover:text-white font-semibold py-2.5 rounded-xl transition-colors text-sm shadow-sm cursor-pointer"
-                  >
-                    Ver receta 🍳
-                  </Link>
-                </CardContent>
-              </Card>
+            {topRecipes.map((recipe, idx) => (
+              <RecipeCard key={recipe._id} recipe={recipe} initialIsFavorite={favoriteStatuses[idx]} />
             ))}
           </div>
         </div>
